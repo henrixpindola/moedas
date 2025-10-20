@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotações AwesomeAPI</title>
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Cotações de Moedas - AwesomeAPI</h1>
+    </header>
+
+    <div class="container">
+      <section class="currency-selection" aria-labelledby="selecao-title">
+        <h2 id="selecao-title" class="section-title">Seleção de Moedas</h2>
+        <div class="selection-group">
+          <div class="form-group">
+            <label for="currency-select">Selecionar Moeda:</label>
+            <div class="select-wrapper">
+              <select id="currency-select">
+                <option value="">Selecione uma moeda...</option>
+                <!-- As opções serão preenchidas pelo JavaScript -->
+              </select>
+            </div>
+          </div>
+          <button id="add-currency-btn" class="btn">Adicionar</button>
+        </div>
+
+        <div class="selected-currencies">
+          <strong>Moedas Selecionadas:</strong>
+          <div class="selected-list" id="selected-list">
+            <!-- Tags das moedas selecionadas serão inseridas aqui -->
+          </div>
+        </div>
+
+        <div class="controls" style="margin-top: 1rem">
+          <button id="clear-all-btn" class="btn">Limpar Todas</button>
+          <button id="load-quotes-btn" class="btn">Carregar Cotações</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="cotacoes-title">
+        <h2 id="cotacoes-title" class="section-title">
+          Cotações em Tempo Real
+        </h2>
+        <div class="controls">
+          <button id="refresh-btn" class="btn">
+            <span class="btn-text">Atualizar</span>
+            <span class="btn-icon">↻</span>
+          </button>
+        </div>
+        <div class="cards" id="moedas">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="historico-title">
+        <h2 id="historico-title" class="section-title">Histórico</h2>
+        <div class="controls">
+          <div class="form-group">
+            <label for="days-select">Período:</label>
+            <div class="select-wrapper">
+              <select id="days-select">
+                <option value="7">Últimos 7 dias</option>
+                <option value="15">Últimos 15 dias</option>
+                <option value="30">Últimos 30 dias</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="currency-historic">Moeda:</label>
+            <div class="select-wrapper">
+              <select id="currency-historic">
+                <!-- As opções serão preenchidas pelo JavaScript -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <table id="historico">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Compra</th>
+              <th>Venda</th>
+              <th>Variação (%)</th>
+              <th>Máximo</th>
+              <th>Mínimo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" class="loading">
+                <div class="spinner"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="last-update" id="last-update"></div>
+    </div>
+
+    <script src="js.js"></script>
+  </body>
+</html>
