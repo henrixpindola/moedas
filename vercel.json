@@ -6,10 +6,6 @@
     {
       "source": "/",
       "destination": "/pages/index.html"
-    },
-    {
-      "source": "/sobre",
-      "destination": "/pages/sobre.html"
     }
   ],
   "headers": [
