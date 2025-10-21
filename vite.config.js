@@ -52,8 +52,11 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input
-    }
-  }
+    },
+    outDir: 'dist',
+    assetsDir: 'assets'
+  },
+  base: '/'
 });
 
 

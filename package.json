@@ -5,7 +5,9 @@
   "description": "Starter fullstack simples com Vite + Express (dev local)",
   "main": "server/server.js",
   "scripts": {
-    "dev": "concurrently -k -n api,web -c cyan,magenta \"cross-env PORT=3001 nodemon server/server.js\" \"vite --open\""
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"cross-env PORT=3001 nodemon server/server.js\" \"vite --open\"",
+    "build": "vite build"
+
   },
   "dependencies": {
     "express": "^4.19.2"
