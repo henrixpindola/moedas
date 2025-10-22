@@ -6,11 +6,12 @@
   "main": "server/server.js",
   "scripts": {
     "dev": "concurrently -k -n api,web -c cyan,magenta \"cross-env PORT=3001 nodemon server/server.js\" \"vite --open\"",
-    "build": "vite build"
-
+    "build": "vite build",
+    "vercel-build": "npm install && npm run build"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "express-http-proxy": "^2.1.2"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
@@ -19,5 +20,3 @@
     "vite": "^5.4.6"
   }
 }
-
-
