@@ -324,3 +324,67 @@ tbody tr:nth-child(even) {
     width: 100%;
   }
 }
+
+/* =======================================
+   FOOTER MINIMALISTA CLÁSSICO-MODERNO
+======================================= */
+.footer {
+  background: #313537;
+  color: var(--text-light);
+  padding: 1.5rem 1rem;
+  border-top: 1px solid #222;
+  box-shadow: var(--shadow);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-brand {
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-nav {
+    gap: 1rem;
+  }
+}
