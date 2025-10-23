@@ -7,10 +7,21 @@
     <link rel="stylesheet" href="/src/styles/style.css" />
   </head>
   <body>
+    <div class="topbar">
+      <div class="topbar-content">
+        <span>
+          <div id="menu-bar" onclick="menuOnClick()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div></div
+        ></span>
+        <span class="attention-icon" title="Ajuda">❓</span>
+      </div>
+    </div>
     <nav class="navbar">
       <ul class="nav">
         <li>
-          Home
+          Início
           <ul class="dropdown">
             <li>Menu 1</li>
             <li>Menu 2</li>
@@ -21,7 +32,7 @@
           </ul>
         </li>
         <li>
-          About
+          Cotações
           <ul class="dropdown">
             <li>Menu 1</li>
             <li>Menu 2</li>
@@ -35,7 +46,7 @@
           </ul>
         </li>
         <li>
-          Pricing
+          Conversão de valores
           <ul class="dropdown">
             <li>Menu 1</li>
             <li>Menu 2</li>
@@ -43,14 +54,14 @@
           </ul>
         </li>
         <li>
-          Docs
+          Investimentos
           <ul class="dropdown">
             <li>Menu 1</li>
             <li>Menu 2</li>
           </ul>
         </li>
         <li>
-          Contact
+          Quem somos
           <ul class="dropdown">
             <li>Menu 1</li>
             <li>Menu 2</li>
@@ -170,5 +181,25 @@
 
     <script type="module" src="/src/scripts/scripts.js"></script>
     <script type="module" src="/src/scripts/menu.js"></script>
+    <script type="module" src="/src/scripts/attention.js"></script>
+    <script type="module" src="/src/scripts/menu-bar.js"></script>
+
+    <!-- Modal de Ajuda -->
+    <div id="readerModal" class="reader-modal">
+      <div class="reader-modal-content">
+        <button class="reader-modal-close">&times;</button>
+        <h2>Como Usar</h2>
+        <p><strong>Funcionalidades:</strong></p>
+        <p>• Remover quebras de linha</p>
+        <p>• Corrigir espaçamento automático</p>
+        <p>• Diferentes opções de capitalização</p>
+        <p>• Proteção de palavras personalizadas</p>
+        <p>• Limite de 320 caracteres</p>
+        <p>
+          <strong>Dica:</strong> Use palavras personalizadas para proteger
+          termos específicos durante a formatação.
+        </p>
+      </div>
+    </div>
   </body>
 </html>
