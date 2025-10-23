@@ -37,8 +37,7 @@ Este projeto permite visualizar cotações de moedas estrangeiras em relação a
    - Selecione o período desejado (7, 15 ou 30 dias)
    - Escolha a moeda para visualizar o histórico
    - A tabela será atualizada automaticamente
-``
-```
+  
 ## 🎨 Características da Interface
 
 - **Design Moderno**: Cards com sombras e gradientes
@@ -57,6 +56,7 @@ Para executar o projeto localmente:
 ## 📊 Moedas Disponíveis
 
 O sistema suporta as principais moedas internacionais, incluindo:
+
 - Dólar Americano (USD)
 - Euro (EUR)
 - Libra Esterlina (GBP)
@@ -66,6 +66,7 @@ O sistema suporta as principais moedas internacionais, incluindo:
 ## 📱 Responsividade
 
 O projeto é totalmente responsivo, adaptando-se a:
+
 - Desktops
 - Tablets
 - Dispositivos móveis
