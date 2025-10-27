@@ -67,7 +67,6 @@ body {
 ======================================= */
 .topbar {
   background: black;
-  padding: 0.75rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -84,42 +83,34 @@ body {
 }
 
 /* Hamburger Menu */
-#menu-bar {
+.menu-bar {
   width: 32px;
   height: 24px;
   position: relative;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   transition: var(--transition);
 }
 
 .bar {
   height: 3px;
   width: 100%;
-  background-color: var(--text-light);
-  border-radius: 3px;
+  background-color: var(--primary-light);
+  border-radius: 1px;
   transition: var(--transition);
   transform-origin: center;
 }
 
-#menu-bar:hover .bar {
-  background-color: var(--primary-light);
+.menu-bar:hover {
+  background-color: transparent;
 }
 
-#menu-bar.change #bar1 {
+.menu-bar.change {
   transform: rotate(-45deg) translate(-6px, 6px);
   background-color: var(--accent-color);
-}
-
-#menu-bar.change #bar2 {
   opacity: 0;
-}
-
-#menu-bar.change #bar3 {
-  transform: rotate(45deg) translate(-6px, -6px);
-  background-color: var(--accent-color);
 }
 
 .attention-icon {
@@ -134,12 +125,10 @@ body {
   width: 40px;
   height: 40px;
   color: var(--primary-light);
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .attention-icon:hover {
-  background-color: rgba(255, 255, 255, 0.21);
-  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .menu-icon {
@@ -154,21 +143,17 @@ body {
   width: 40px;
   height: 40px;
   color: var(--primary-light);
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .menu-icon:hover {
-  background-color: rgba(255, 255, 255, 0.21);
-  color: var(--primary-light);
-  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
-
 
 /* =======================================
    NAVBAR
 ======================================= */
 .navbar {
-  background: black;
+  background: transparent;
   box-shadow: var(--shadow-lg);
   position: sticky;
   top: 61px;

@@ -6,73 +6,60 @@
     <title>Cotações AwesomeAPI</title>
     <link rel="icon" type="image/png" href="/src/assets/logo.png" />
     <link rel="stylesheet" href="/src/styles/style.css" />
-  </head>  
+  </head>
   <body>
     <div class="topbar">
       <div class="topbar-content">
         <span class="menu-icon">
-          <div id="menu-bar" onclick="menuOnClick()">
+          <div id="menu-bar" class="menu-bar" onclick="menuOnClick()">
             <div id="bar1" class="bar"></div>
             <div id="bar2" class="bar"></div>
-            <div id="bar3" class="bar"></div></div
-        ></span>
+            <div id="bar3" class="bar"></div>
+          </div>
+        </span>
+
+        <div class="navbar">
+          <ul class="nav">
+            <li>Início</li>
+            <li>Converter de valores</li>
+            <li>
+              Cotações
+              <ul class="dropdown">
+                <li>Real</li>
+                <li>Dólar estadunidense</li>
+                <li>Euro</li>
+                <li>Outras moedas</li>
+                <li>Criptoativos</li>
+              </ul>
+            </li>
+            <li>
+              Investimentos
+              <ul class="dropdown">
+                <li>Renda fixa</li>
+                <li>Renda variável</li>
+                <li>TESOURO DIRETO</li>
+                <li>Fundos de investimentos</li>
+                <li>Fundos imobiliários</li>
+                <li>Previdência privada</li>
+                <li>BitCoin e outras cripto</li>
+                <li>Mercado de ações</li>
+                <li>Outros investimentos</li>
+              </ul>
+            </li>
+            <li>
+              Quem somos
+              <ul class="dropdown">
+                <li>Nossa equipe</li>
+                <li>Missão</li>
+                <li>Contato</li>
+                <li>Ajuda</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
         <span class="attention-icon" title="Ajuda"><b>?</b></span>
       </div>
     </div>
-    <nav class="navbar">
-      <ul class="nav">
-        <li>
-          Início
-          <ul class="dropdown">
-            <li>Menu 1</li>
-            <li>Menu 2</li>
-            <li>Menu 3</li>
-            <li>Menu 4</li>
-            <li>Menu 5</li>
-            <li>Menu 6</li>
-          </ul>
-        </li>
-        <li>
-          Cotações
-          <ul class="dropdown">
-            <li>Menu 1</li>
-            <li>Menu 2</li>
-            <li>Menu 3</li>
-            <li>Menu 4</li>
-            <li>Menu 5</li>
-            <li>Menu 6</li>
-            <li>Menu 7</li>
-            <li>Menu 8</li>
-            <li>Menu 9</li>
-          </ul>
-        </li>
-        <li>
-          Conversão de valores
-          <ul class="dropdown">
-            <li>Menu 1</li>
-            <li>Menu 2</li>
-            <li>Menu 3</li>
-          </ul>
-        </li>
-        <li>
-          Investimentos
-          <ul class="dropdown">
-            <li>Menu 1</li>
-            <li>Menu 2</li>
-          </ul>
-        </li>
-        <li>
-          Quem somos
-          <ul class="dropdown">
-            <li>Menu 1</li>
-            <li>Menu 2</li>
-            <li>Menu 3</li>
-            <li>Menu 4</li>
-            <li>Menu 5</li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
 
     <div class="container">
       <section class="currency-selection" aria-labelledby="selecao-title">
