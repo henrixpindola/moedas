@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotações AwesomeAPI</title>
+    <link rel="icon" type="image/png" href="/src/assets/logo.png" />
+    <link rel="stylesheet" href="/src/styles/style.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-content">
+        <span class="menu-icon">
+          <div id="menu-bar" onclick="menuOnClick()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div></div
+        ></span>
+        <span class="attention-icon" title="Ajuda"><b>?</b></span>
+      </div>
+    </div>
+    <nav class="navbar">
+      <ul class="nav">
+        <li>
+          Início
+          <ul class="dropdown">
+            <li>Menu 1</li>
+            <li>Menu 2</li>
+            <li>Menu 3</li>
+            <li>Menu 4</li>
+            <li>Menu 5</li>
+            <li>Menu 6</li>
+          </ul>
+        </li>
+        <li>
+          Cotações
+          <ul class="dropdown">
+            <li>Menu 1</li>
+            <li>Menu 2</li>
+            <li>Menu 3</li>
+            <li>Menu 4</li>
+            <li>Menu 5</li>
+            <li>Menu 6</li>
+            <li>Menu 7</li>
+            <li>Menu 8</li>
+            <li>Menu 9</li>
+          </ul>
+        </li>
+        <li>
+          Conversão de valores
+          <ul class="dropdown">
+            <li>Menu 1</li>
+            <li>Menu 2</li>
+            <li>Menu 3</li>
+          </ul>
+        </li>
+        <li>
+          Investimentos
+          <ul class="dropdown">
+            <li>Menu 1</li>
+            <li>Menu 2</li>
+          </ul>
+        </li>
+        <li>
+          Quem somos
+          <ul class="dropdown">
+            <li>Menu 1</li>
+            <li>Menu 2</li>
+            <li>Menu 3</li>
+            <li>Menu 4</li>
+            <li>Menu 5</li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <section class="currency-selection" aria-labelledby="selecao-title">
+        <h2 id="selecao-title" class="section-title">Seleção de Moedas</h2>
+        <div class="selection-group">
+          <div class="form-group">
+            <label for="currency-select">Selecionar Moeda:</label>
+            <div class="select-wrapper">
+              <select id="currency-select">
+                <option value="">Selecione uma moeda...</option>
+                <!-- As opções serão preenchidas pelo JavaScript -->
+              </select>
+            </div>
+          </div>
+          <button id="add-currency-btn" class="btn">Adicionar</button>
+        </div>
+
+        <div class="selected-currencies">
+          <strong>Moedas Selecionadas:</strong>
+          <div class="selected-list" id="selected-list">
+            <!-- Tags das moedas selecionadas serão inseridas aqui -->
+          </div>
+        </div>
+
+        <div class="controls" style="margin-top: 1rem">
+          <button id="clear-all-btn" class="btn">Limpar Todas</button>
+          <button id="load-quotes-btn" class="btn">Carregar Cotações</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="cotacoes-title">
+        <h2 id="cotacoes-title" class="section-title">
+          Cotações em Tempo Real
+        </h2>
+        <div class="controls">
+          <button id="refresh-btn" class="btn">
+            <span class="btn-text">Atualizar</span>
+            <span class="btn-icon">↻</span>
+          </button>
+        </div>
+        <div class="cards" id="moedas">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="historico-title">
+        <h2 id="historico-title" class="section-title">Histórico</h2>
+        <div class="controls">
+          <div class="form-group">
+            <label for="days-select">Período:</label>
+            <div class="select-wrapper">
+              <select id="days-select">
+                <option value="7">Últimos 7 dias</option>
+                <option value="15">Últimos 15 dias</option>
+                <option value="30">Últimos 30 dias</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="currency-historic">Moeda:</label>
+            <div class="select-wrapper">
+              <select id="currency-historic">
+                <!-- As opções serão preenchidas pelo JavaScript -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <table id="historico">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Compra</th>
+              <th>Venda</th>
+              <th>Variação (%)</th>
+              <th>Máximo</th>
+              <th>Mínimo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" class="loading">
+                <div class="spinner"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section aria-labelledby="historico-title">
+  <h2 id="historico-title" class="section-title">Histórico</h2>
+
+  <div class="controls">
+    ...
+  </div>
+
+  <table id="historico">...</table>
+
+  <!-- Canvas para gráfico -->
+  <div class="chart-container">
+    <canvas id="currencyChart"></canvas>
+  </div>
+</section>
+
+
+      <div class="last-update" id="last-update"></div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="footer-brand">AwesomeAPI Cotações</p>
+        <nav class="footer-nav">
+          <a href="#">Home</a>
+          <a href="#">Docs</a>
+          <a href="#">Contato</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 — Desenvolvido por Valesca, Henrique Espindola e André</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/scripts.js"></script>
+    <script type="module" src="/src/scripts/menu.js"></script>
+    <script type="module" src="/src/scripts/attention.js"></script>
+    <script type="module" src="/src/scripts/menu-bar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/src/scripts/charts.js"></script>
+
+
+    <!-- Modal de Ajuda -->
+    <div id="readerModal" class="reader-modal">
+      <div class="reader-modal-content">
+        <button class="reader-modal-close">&times;</button>
+        <h2>Como Usar</h2>
+        <p><strong>Funcionalidades:</strong></p>
+        <p>• Remover quebras de linha</p>
+        <p>• Corrigir espaçamento automático</p>
+        <p>• Diferentes opções de capitalização</p>
+        <p>• Proteção de palavras personalizadas</p>
+        <p>• Limite de 320 caracteres</p>
+        <p>
+          <strong>Dica:</strong> Use palavras personalizadas para proteger
+          termos específicos durante a formatação.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
