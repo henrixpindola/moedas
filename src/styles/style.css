@@ -32,13 +32,15 @@
   --transition-fast: all 0.15s ease;
 }
 
-/* =======================================
-   RESET E BASE
-======================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 html {
@@ -53,18 +55,13 @@ body {
   min-height: 100vh;
 }
 
-/* =======================================
-   LAYOUT PRINCIPAL
-======================================= */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
-/* =======================================
-   TOPBAR
-======================================= */
+/*TOPBAR*/
 .topbar {
   background: black;
   position: sticky;
@@ -82,7 +79,7 @@ body {
   align-items: center;
 }
 
-/* Hamburger Menu */
+/*Menu*/
 .menu-bar {
   width: 32px;
   height: 24px;
@@ -149,9 +146,7 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* =======================================
-   NAVBAR
-======================================= */
+/*NAVBAR*/
 .navbar {
   background: transparent;
   box-shadow: var(--shadow-lg);
@@ -231,13 +226,6 @@ body {
   border-bottom: none;
 }
 
-/* =======================================
-   SEÇÕES PRINCIPAIS
-======================================= */
-.container {
-  padding: 2rem 1.5rem;
-}
-
 section {
   background: var(--bg-card);
   border-radius: var(--border-radius);
@@ -272,9 +260,7 @@ section:hover {
   border-radius: 2px;
 }
 
-/* =======================================
-   FORMULÁRIOS E CONTROLES
-======================================= */
+/*FORMULÁRIOS E CONTROLES*/
 .form-group {
   display: flex;
   flex-direction: column;
@@ -323,9 +309,7 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* =======================================
-   BOTÕES
-======================================= */
+/*BOTÕES*/
 .btn {
   background: var(--primary-color);
   color: var(--text-light);
@@ -372,9 +356,7 @@ select:focus {
   color: var(--text-light);
 }
 
-/* =======================================
-   LAYOUT DE GRUPOS
-======================================= */
+/*LAYOUT DE GRUPOS*/
 .selection-group {
   display: flex;
   gap: 1rem;
@@ -391,9 +373,7 @@ select:focus {
   margin-top: 1rem;
 }
 
-/* =======================================
-   MOEDAS SELECIONADAS
-======================================= */
+/*MOEDAS SELECIONADAS*/
 .selected-currencies {
   background: var(--bg-hover);
   border-radius: var(--border-radius-sm);
@@ -434,9 +414,7 @@ select:focus {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* =======================================
-   CARDS DE COTAÇÕES
-======================================= */
+/*CARDS DE COTAÇÕES*/
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -478,9 +456,7 @@ select:focus {
   background: linear-gradient(90deg, var(--danger-color), #f87171);
 }
 
-/* =======================================
-   LOADING E SPINNER
-======================================= */
+/*LOADING E SPINNER*/
 .loading {
   display: flex;
   align-items: center;
@@ -497,15 +473,7 @@ select:focus {
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* =======================================
-   TABELA HISTÓRICO
-======================================= */
+/*TABELA HISTÓRICO*/
 table {
   width: 100%;
   border-collapse: collapse;
@@ -547,9 +515,7 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* =======================================
-   ÚLTIMA ATUALIZAÇÃO
-======================================= */
+/*ÚLTIMA ATUALIZAÇÃO*/
 .last-update {
   text-align: center;
   color: var(--text-muted);
@@ -561,14 +527,11 @@ tbody tr:last-child td {
   box-shadow: var(--shadow-sm);
 }
 
-/* =======================================
-   FOOTER
-======================================= */
+/*FOOTER*/
 .footer {
   background: var(--bg-dark);
   color: var(--text-light);
-  padding: 2rem 0 1rem;
-  margin-top: 4rem;
+  padding: 1rem 0 1rem;
 }
 
 .footer-content {
@@ -621,9 +584,7 @@ tbody tr:last-child td {
   padding-right: 1.5rem;
 }
 
-/* =======================================
-   MODAL
-======================================= */
+/*MODAL*/
 .reader-modal {
   display: none;
   position: fixed;
@@ -692,28 +653,188 @@ tbody tr:last-child td {
   color: var(--text-primary);
 }
 
-/* =======================================
-   ANIMAÇÕES
-======================================= */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/*UTILITÁRIOS*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -40%);
+.text-positive {
+  color: var(--success-color);
+}
+
+.text-negative {
+  color: var(--danger-color);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-success {
+  background: var(--success-color);
+  color: white;
+}
+
+.badge-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.chart-container {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+.historico {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.historico th {
+  background-color: #f8f9fa;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.historico td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.historico tr:last-child td {
+  border-bottom: none;
+}
+
+.positive {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.negative {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+/* Loading states */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+
+.chart-container {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+.currency-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #e3f2fd;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin: 5px;
+  font-size: 14px;
+  border: 1px solid #bbdefb;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+.remove-btn:hover {
+  color: #f44336;
+}
+
+.positive {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.negative {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  color: #f44336;
+  background: #ffebee;
+  border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .chart-wrapper {
+      height: 300px;
   }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
+  
+  .historico {
+      font-size: 0.875rem;
+  }
+  
+  .historico th,
+  .historico td {
+      padding: 8px;
   }
 }
 
-/* =======================================
-   RESPONSIVIDADE
-======================================= */
 @media (max-width: 1024px) {
   .cards {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -782,199 +903,31 @@ tbody tr:last-child td {
   }
 }
 
-/* =======================================
-   UTILITÁRIOS
-======================================= */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/*ANIMAÇÕES*/
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.text-positive {
-  color: var(--success-color);
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 
-.text-negative {
-  color: var(--danger-color);
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.badge-success {
-  background: var(--success-color);
-  color: white;
-}
-
-.badge-danger {
-  background: var(--danger-color);
-  color: white;
-}
-
-
-
-
-
-
-
-/* Adicione ao seu style.css */
-
-.chart-container {
-  background: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 2rem 0;
-}
-
-.chart-wrapper {
-  position: relative;
-  height: 400px;
-  width: 100%;
-}
-
-/* Estilos para a tabela de histórico */
-#historico {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-#historico th {
-  background-color: #f8f9fa;
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid #dee2e6;
-}
-
-#historico td {
-  padding: 12px;
-  border-bottom: 1px solid #dee2e6;
-}
-
-#historico tr:last-child td {
-  border-bottom: none;
-}
-
-.positive {
-  color: #28a745;
-  font-weight: 600;
-}
-
-.negative {
-  color: #dc3545;
-  font-weight: 600;
-}
-
-/* Loading states */
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.spinner {
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #3498db;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .chart-wrapper {
-      height: 300px;
-  }
-  
-  #historico {
-      font-size: 0.875rem;
-  }
-  
-  #historico th,
-  #historico td {
-      padding: 8px;
-  }
-}
-
-.chart-container {
-  background: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 2rem 0;
-}
-
-.chart-wrapper {
-  position: relative;
-  height: 400px;
-  width: 100%;
-}
-
-.currency-tag {
-  display: inline-flex;
-  align-items: center;
-  background: #e3f2fd;
-  padding: 5px 12px;
-  border-radius: 20px;
-  margin: 5px;
-  font-size: 14px;
-  border: 1px solid #bbdefb;
-}
-
-.remove-btn {
-  background: none;
-  border: none;
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  color: #666;
-}
-
-.remove-btn:hover {
-  color: #f44336;
-}
-
-.positive {
-  color: #4caf50;
-  font-weight: bold;
-}
-
-.negative {
-  color: #f44336;
-  font-weight: bold;
-}
-
-.error-message {
-  text-align: center;
-  padding: 2rem;
-  color: #f44336;
-  background: #ffebee;
-  border-radius: 8px;
 }

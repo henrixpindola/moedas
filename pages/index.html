@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cotações AwesomeAPI</title>
+    <title>MoneyLens - Cotações de Moedas</title>
     <link rel="icon" type="image/png" href="/src/assets/logo.png" />
     <link rel="stylesheet" href="/src/styles/style.css" />
   </head>
@@ -21,38 +21,50 @@
 
         <div class="navbar">
           <ul class="nav">
-            <li>Início</li>
-            <li>Converter de valores</li>
+            <li><a href="/pages/index.html">Início</a></li>
+            <li><a href="/pages/converter.html">Converter valores</a></li>
             <li>
               Cotações
               <ul class="dropdown">
-                <li>Real</li>
-                <li>Dólar estadunidense</li>
-                <li>Euro</li>
-                <li>Outras moedas</li>
-                <li>Criptoativos</li>
+                <li><a href="/pages/exchange.html">Real</a></li>
+                <li><a href="/pages/exchange.html">Dólar</a></li>
+                <li><a href="/pages/exchange.html">Euro</a></li>
+                <li><a href="/pages/exchange.html">Outras moedas</a></li>
+                <li><a href="/pages/exchange.html">Criptomoedas</a></li>
               </ul>
             </li>
             <li>
               Investimentos
               <ul class="dropdown">
-                <li>Renda fixa</li>
-                <li>Renda variável</li>
-                <li>TESOURO DIRETO</li>
-                <li>Fundos de investimento</li>
-                <li>Fundos imobiliários</li>
-                <li>Previdência privada</li>
-                <li>Bitcoin e outras criptos</li>
-                <li>Mercado de ações</li>
-                <li>Outros investimentos</li>
+                <li><a href="/pages/investments.html">Renda fixa</a></li>
+                <li><a href="/pages/investments.html">Renda variável</a></li>
+                <li><a href="/pages/investments.html">TESOURO DIRETO</a></li>
+                <li>
+                  <a href="/pages/investments.html">Fundos de investimento</a>
+                </li>
+                <li>
+                  <a href="/pages/investments.html">Fundos imobiliários</a>
+                </li>
+                <li>
+                  <a href="/pages/investments.html">Previdência privada</a>
+                </li>
+                <li>
+                  <a href="/pages/investments.html"
+                    >Bitcoin e outros criptoativos</a
+                  >
+                </li>
+                <li><a href="/pages/investments.html">Mercado de ações</a></li>
+                <li>
+                  <a href="/pages/investments.html">Outros investimentos</a>
+                </li>
               </ul>
             </li>
             <li>
               Quem somos
               <ul class="dropdown">
-                <li>Nossa equipe</li>
-                <li>Objetivo</li>
-                <li>Contato</li>
+                <li><a href="/pages/whoweare.html">Nossa equipe</a></li>
+                <li><a href="/pages/whoweare.html">Objetivo</a></li>
+                <li><a href="/pages/whoweare.html">Contato</a></li>
                 <li>Ajuda</li>
               </ul>
             </li>
@@ -63,7 +75,25 @@
     </div>
 
     <div class="container">
-      <!-- Seção de seleção de moedas -->
+      <section class="real-time-quotes">
+        <h2 class="section-title">Cotações em Tempo Real</h2>
+
+        <div class="cards" id="moedas">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+        <div class="controls">
+          <button id="refresh-btn" class="btn">
+            <span class="btn-text">Atualizar</span>
+            <span class="btn-icon">↻</span>
+          </button>
+          <button id="btn-selection" class="btn">
+            <span class="btn-text">Selecionar moedas</span>
+            <span class="btn-icon">$</span>
+          </button>
+        </div>
+      </section>
+
+      <!--FUTURO MODAL -->
       <section class="currency-selection">
         <h2 class="section-title">Seleção de Moedas</h2>
         <div class="selection-group">
@@ -88,22 +118,8 @@
           <button id="load-quotes-btn" class="btn">Carregar Cotações</button>
         </div>
       </section>
+      <!--FUTURO MODAL -->
 
-      <!-- Seção de cotações em tempo real -->
-      <section class="real-time-quotes">
-        <h2 class="section-title">Cotações em Tempo Real</h2>
-        <div class="controls">
-          <button id="refresh-btn" class="btn">
-            <span class="btn-text">Atualizar</span>
-            <span class="btn-icon">↻</span>
-          </button>
-        </div>
-        <div class="cards" id="moedas">
-          <div class="loading"><div class="spinner"></div></div>
-        </div>
-      </section>
-
-      <!-- Seção de histórico (gráfico + tabela) -->
       <section class="historic">
         <h2 class="section-title">Histórico</h2>
         <div class="controls">
@@ -126,13 +142,11 @@
           <button id="load-historic-btn" class="btn">Carregar Histórico</button>
         </div>
 
-        <!-- Gráfico histórico -->
         <div class="chart-container" style="margin: 2rem 0">
           <canvas id="historic-chart"></canvas>
         </div>
 
-        <!-- Tabela histórica -->
-        <table id="historico">
+        <table id="historico" class="historico">
           <thead>
             <tr>
               <th>Data</th>
@@ -154,25 +168,17 @@
 
     <footer class="footer">
       <div class="footer-content">
-        <p class="footer-brand">AwesomeAPI Cotações</p>
+        <p class="footer-brand">MoneyLens - Cotações de Moedas</p>
         <nav class="footer-nav">
-          <a href="#">Home</a>
-          <a href="#">Docs</a>
-          <a href="#">Contato</a>
+          <a href="https://github.com/henrixpindola/moedas">Projeto GitHub</a>
         </nav>
       </div>
-      <div class="footer-bottom">
-        <p>© 2025 — Desenvolvido por Valesca, Henrique Espindola e André</p>
-      </div>
     </footer>
-
-    <!-- Scripts -->
     <script type="module" src="/src/scripts/scripts.js"></script>
     <script type="module" src="/src/scripts/menu.js"></script>
     <script type="module" src="/src/scripts/attention.js"></script>
     <script type="module" src="/src/scripts/menu-bar.js"></script>
     <script type="module" src="/src/scripts/historic-chart.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Biblioteca Chart.js -->
   </body>
 </html>
