@@ -1,297 +1,553 @@
-const CURRENCY_PAIRS = [
-  { code: "USD-BRL", name: "Dólar Americano/Real Brasileiro" },
-  { code: "USD-BRLT", name: "Dólar Americano/Real Brasileiro Turismo" },
-  { code: "EUR-BRL", name: "Euro/Real Brasileiro" },
-  { code: "GBP-BRL", name: "Libra Esterlina/Real Brasileiro" },
-  { code: "ARS-BRL", name: "Peso Argentino/Real Brasileiro" },
-  { code: "CAD-BRL", name: "Dólar Canadense/Real Brasileiro" },
-  { code: "JPY-BRL", name: "Iene Japonês/Real Brasileiro" },
-  { code: "CHF-BRL", name: "Franco Suíço/Real Brasileiro" },
-  { code: "AUD-BRL", name: "Dólar Australiano/Real Brasileiro" },
-  { code: "CNY-BRL", name: "Yuan Chinês/Real Brasileiro" },
-  { code: "BTC-BRL", name: "Bitcoin/Real Brasileiro" },
-  { code: "ETH-BRL", name: "Ethereum/Real Brasileiro" },
-  { code: "LTC-BRL", name: "Litecoin/Real Brasileiro" },
-  { code: "XRP-BRL", name: "XRP/Real Brasileiro" },
-  { code: "DOGE-BRL", name: "Dogecoin/Real Brasileiro" },
-  { code: "EUR-USD", name: "Euro/Dólar Americano" },
-  { code: "GBP-USD", name: "Libra Esterlina/Dólar Americano" },
-  { code: "USD-JPY", name: "Dólar Americano/Iene Japonês" },
-  { code: "USD-CHF", name: "Dólar Americano/Franco Suíço" },
-  { code: "USD-CAD", name: "Dólar Americano/Dólar Canadense" },
-  { code: "AUD-USD", name: "Dólar Australiano/Dólar Americano" },
-  { code: "NZD-USD", name: "Dólar Neozelandês/Dólar Americano" },
-  { code: "BTC-USD", name: "Bitcoin/Dólar Americano" },
-  { code: "ETH-USD", name: "Ethereum/Dólar Americano" },
-  { code: "EUR-GBP", name: "Euro/Libra Esterlina" },
-  { code: "EUR-JPY", name: "Euro/Iene Japonês" },
-  { code: "EUR-CHF", name: "Euro/Franco Suíço" },
-  { code: "EUR-CAD", name: "Euro/Dólar Canadense" },
-  { code: "BTC-EUR", name: "Bitcoin/Euro" },
-  { code: "ETH-EUR", name: "Ethereum/Euro" },
-  { code: "USD-BRLPTAX", name: "Dólar Americano/Real Brasileiro PTAX" },
-  { code: "EUR-BRLPTAX", name: "Euro/Real Brasileiro PTAX" },
-  { code: "XAU-USD", name: "Ouro/Dólar Americano" },
-  { code: "XAU-BRL", name: "Ouro/Real Brasileiro" },
-  { code: "XAU-EUR", name: "Ouro/Euro" },
-  { code: "XAG-USD", name: "Prata/Dólar Americano" },
-  { code: "XAG-BRL", name: "Prata/Real Brasileiro" },
-  { code: "USD-MXN", name: "Dólar Americano/Peso Mexicano" },
-  { code: "USD-ZAR", name: "Dólar Americano/Rand Sul-Africano" },
-  { code: "USD-TRY", name: "Dólar Americano/Nova Lira Turca" },
-  { code: "USD-SGD", name: "Dólar Americano/Dólar de Cingapura" },
-  { code: "USD-INR", name: "Dólar Americano/Rúpia Indiana" },
-  { code: "USD-KRW", name: "Dólar Americano/Won Sul-Coreano" },
-];
-
-class AwesomeAPI {
-  constructor(apiKey = null) {
-    this.baseURL = "https://economia.awesomeapi.com.br";
-    this.apiKey = apiKey || "76d98d2ec82a3d1f0e5decdcb1d3b9cb77bc5c34fa9bd38e48a6d241cdc4f58c";
-  }
-
-  async makeRequest(url) {
-    try {
-      const response = await fetch(url);
-      return response.ok ? await response.json() : (() => { throw new Error(`Erro HTTP: ${response.status}`) })();
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-      throw error;
-    }
-  }
-
-  async getLastQuotes(currencies) {
-    return await this.makeRequest(`${this.baseURL}/json/last/${currencies}`);
-  }
-
-  async getDailyQuotes(currency, days = 1) {
-    return await this.makeRequest(`${this.baseURL}/json/daily/${currency}/${days}`);
-  }
-
-  static formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}${month}${day}`;
-  }
-}
+// /src/scripts/scripts.js
 
 class CurrencyApp {
   constructor() {
-    this.api = new AwesomeAPI();
-    this.selectedCurrencies = new Set(["USD-BRL", "EUR-BRL", "BTC-BRL"]);
-    this.initializeElements();
-    this.setupEventListeners();
-    this.loadCurrencyOptions();
-    this.updateSelectedList();
-    this.loadData();
+      this.selectedCurrencies = new Set();
+      this.historicChart = null;
+      this.init();
   }
 
-  initializeElements() {
-    this.moedasContainer = document.getElementById("moedas");
-    this.historicoTbody = document.querySelector("#historico tbody");
-    this.refreshBtn = document.getElementById("refresh-btn");
-    this.currencyHistoric = document.getElementById("currency-historic");
-    this.lastUpdate = document.getElementById("last-update");
-    this.currencySelect = document.getElementById("currency-select");
-    this.addCurrencyBtn = document.getElementById("add-currency-btn");
-    this.clearAllBtn = document.getElementById("clear-all-btn");
-    this.loadQuotesBtn = document.getElementById("load-quotes-btn");
-    this.selectedList = document.getElementById("selected-list");
-    this.daysSelect = document.getElementById("days-select");
+  init() {
+      document.addEventListener('DOMContentLoaded', () => {
+          this.setupEventListeners();
+          this.loadCurrencyOptions();
+          this.loadInitialData();
+      });
   }
 
   setupEventListeners() {
-    this.refreshBtn.addEventListener("click", () => this.loadData());
-    this.daysSelect.addEventListener("change", () => this.loadHistoric());
-    this.currencyHistoric.addEventListener("change", () => this.loadHistoric());
-    this.addCurrencyBtn.addEventListener("click", () => this.addCurrency());
-    this.clearAllBtn.addEventListener("click", () => this.clearAll());
-    this.loadQuotesBtn.addEventListener("click", () => this.loadQuotes());
-    this.currencySelect.addEventListener("keypress", (e) => e.key === "Enter" && this.addCurrency());
+      // Botão adicionar moeda
+      document.getElementById('add-currency-btn').addEventListener('click', () => {
+          this.addCurrency();
+      });
+
+      // Botão carregar cotações
+      document.getElementById('load-quotes-btn').addEventListener('click', () => {
+          this.loadQuotes();
+      });
+
+      // Botão limpar todas
+      document.getElementById('clear-all-btn').addEventListener('click', () => {
+          this.clearAllCurrencies();
+      });
+
+      // Botão atualizar
+      document.getElementById('refresh-btn').addEventListener('click', () => {
+          this.loadQuotes();
+      });
+
+      // Botão carregar histórico
+      document.getElementById('load-historic-btn').addEventListener('click', () => {
+          this.loadHistoricData();
+      });
+
+      // Enter no select de moedas
+      document.getElementById('currency-select').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+              this.addCurrency();
+          }
+      });
+
+      // Mudanças nos selects de histórico
+      document.getElementById('days-select').addEventListener('change', () => {
+          if (document.getElementById('currency-historic').value) {
+              this.loadHistoricData();
+          }
+      });
+
+      document.getElementById('currency-historic').addEventListener('change', () => {
+          if (document.getElementById('currency-historic').value) {
+              this.loadHistoricData();
+          }
+      });
   }
 
   loadCurrencyOptions() {
-    const createOption = (currency) => {
-      const option = document.createElement("option");
-      option.value = currency.code;
-      option.textContent = currency.name;
-      return option;
-    };
+      const currencies = [
+        { code: "USD-BRL", name: "Dólar Americano/Real Brasileiro" },
+        { code: "USD-BRLT", name: "Dólar Americano/Real Brasileiro Turismo" },
+        { code: "EUR-BRL", name: "Euro/Real Brasileiro" },
+        { code: "GBP-BRL", name: "Libra Esterlina/Real Brasileiro" },
+        { code: "ARS-BRL", name: "Peso Argentino/Real Brasileiro" },
+        { code: "CAD-BRL", name: "Dólar Canadense/Real Brasileiro" },
+        { code: "JPY-BRL", name: "Iene Japonês/Real Brasileiro" },
+        { code: "CHF-BRL", name: "Franco Suíço/Real Brasileiro" },
+        { code: "AUD-BRL", name: "Dólar Australiano/Real Brasileiro" },
+        { code: "CNY-BRL", name: "Yuan Chinês/Real Brasileiro" },
+        { code: "BTC-BRL", name: "Bitcoin/Real Brasileiro" },
+        { code: "ETH-BRL", name: "Ethereum/Real Brasileiro" },
+        { code: "LTC-BRL", name: "Litecoin/Real Brasileiro" },
+        { code: "XRP-BRL", name: "XRP/Real Brasileiro" },
+        { code: "DOGE-BRL", name: "Dogecoin/Real Brasileiro" },
+        { code: "EUR-USD", name: "Euro/Dólar Americano" },
+        { code: "GBP-USD", name: "Libra Esterlina/Dólar Americano" },
+        { code: "USD-JPY", name: "Dólar Americano/Iene Japonês" },
+        { code: "USD-CHF", name: "Dólar Americano/Franco Suíço" },
+        { code: "USD-CAD", name: "Dólar Americano/Dólar Canadense" },
+        { code: "AUD-USD", name: "Dólar Australiano/Dólar Americano" },
+        { code: "NZD-USD", name: "Dólar Neozelandês/Dólar Americano" },
+        { code: "BTC-USD", name: "Bitcoin/Dólar Americano" },
+        { code: "ETH-USD", name: "Ethereum/Dólar Americano" },
+        { code: "EUR-GBP", name: "Euro/Libra Esterlina" },
+        { code: "EUR-JPY", name: "Euro/Iene Japonês" },
+        { code: "EUR-CHF", name: "Euro/Franco Suíço" },
+        { code: "EUR-CAD", name: "Euro/Dólar Canadense" },
+        { code: "BTC-EUR", name: "Bitcoin/Euro" },
+        { code: "ETH-EUR", name: "Ethereum/Euro" },
+        { code: "USD-BRLPTAX", name: "Dólar Americano/Real Brasileiro PTAX" },
+        { code: "EUR-BRLPTAX", name: "Euro/Real Brasileiro PTAX" },
+        { code: "XAU-USD", name: "Ouro/Dólar Americano" },
+        { code: "XAU-BRL", name: "Ouro/Real Brasileiro" },
+        { code: "XAU-EUR", name: "Ouro/Euro" },
+        { code: "XAG-USD", name: "Prata/Dólar Americano" },
+        { code: "XAG-BRL", name: "Prata/Real Brasileiro" },
+        { code: "USD-MXN", name: "Dólar Americano/Peso Mexicano" },
+        { code: "USD-ZAR", name: "Dólar Americano/Rand Sul-Africano" },
+        { code: "USD-TRY", name: "Dólar Americano/Nova Lira Turca" },
+        { code: "USD-SGD", name: "Dólar Americano/Dólar de Cingapura" },
+        { code: "USD-INR", name: "Dólar Americano/Rúpia Indiana" },
+        { code: "USD-KRW", name: "Dólar Americano/Won Sul-Coreano" },
+      ];
 
-    this.currencySelect.innerHTML = '<option value="">Selecione uma moeda...</option>';
-    this.currencyHistoric.innerHTML = '';
-    
-    CURRENCY_PAIRS.forEach(currency => {
-      this.currencySelect.appendChild(createOption(currency));
-      this.currencyHistoric.appendChild(createOption(currency));
-    });
-    
-    this.currencyHistoric.value = "USD-BRL";
+      const currencySelect = document.getElementById('currency-select');
+      const historicSelect = document.getElementById('currency-historic');
+
+      currencies.forEach(currency => {
+          // Select principal
+          const option = document.createElement('option');
+          option.value = currency.code;
+          option.textContent = `${currency.code} - ${currency.name}`;
+          currencySelect.appendChild(option);
+
+          // Select do histórico
+          const historicOption = document.createElement('option');
+          historicOption.value = currency.code;
+          historicOption.textContent = `${currency.code} - ${currency.name}`;
+          historicSelect.appendChild(historicOption);
+      });
   }
 
   addCurrency() {
-    const selectedValue = this.currencySelect.value;
-    selectedValue && !this.selectedCurrencies.has(selectedValue) 
-      ? (this.selectedCurrencies.add(selectedValue), this.updateSelectedList(), this.currencySelect.value = "")
-      : null;
+      const select = document.getElementById('currency-select');
+      const currency = select.value;
+
+      if (!currency) {
+          alert('Por favor, selecione uma moeda.');
+          return;
+      }
+
+      if (this.selectedCurrencies.has(currency)) {
+          alert('Esta moeda já foi adicionada.');
+          return;
+      }
+
+      this.selectedCurrencies.add(currency);
+      this.updateSelectedCurrenciesList();
+      select.value = '';
   }
 
-  removeCurrency(currencyCode) {
-    this.selectedCurrencies.delete(currencyCode);
-    this.updateSelectedList();
+  updateSelectedCurrenciesList() {
+      const list = document.getElementById('selected-list');
+      list.innerHTML = '';
+
+      this.selectedCurrencies.forEach(currency => {
+          const tag = document.createElement('div');
+          tag.className = 'currency-tag';
+          tag.innerHTML = `
+              ${currency}
+              <button class="remove-btn" data-currency="${currency}">×</button>
+          `;
+          list.appendChild(tag);
+      });
+
+      // Adicionar event listeners aos botões de remover
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+              const currency = e.target.getAttribute('data-currency');
+              this.removeCurrency(currency);
+          });
+      });
   }
 
-  clearAll() {
-    this.selectedCurrencies.clear();
-    this.updateSelectedList();
-    this.moedasContainer.innerHTML = "<p>Selecione moedas para exibir as cotações.</p>";
+  removeCurrency(currency) {
+      this.selectedCurrencies.delete(currency);
+      this.updateSelectedCurrenciesList();
   }
 
-  updateSelectedList() {
-    this.selectedList.innerHTML = this.selectedCurrencies.size === 0 
-      ? '<span style="color: #666;">Nenhuma moeda selecionada</span>'
-      : Array.from(this.selectedCurrencies).map(currencyCode => {
-          const currency = CURRENCY_PAIRS.find(c => c.code === currencyCode);
-          return `<div class="currency-tag">
-                    ${currency ? currency.name : currencyCode}
-                    <button type="button" onclick="currencyApp.removeCurrency('${currencyCode}')">×</button>
-                  </div>`;
-        }).join('');
-  }
-
-  async loadData() {
-    this.setLoadingState(true);
-    try {
-      await Promise.all([this.loadQuotes(), this.loadHistoric()]);
-      this.updateLastUpdateTime();
-    } catch (error) {
-      this.showError("Erro ao carregar dados. Tente novamente.");
-    } finally {
-      this.setLoadingState(false);
-    }
+  clearAllCurrencies() {
+      this.selectedCurrencies.clear();
+      this.updateSelectedCurrenciesList();
+      document.getElementById('moedas').innerHTML = '<div class="loading"><div class="spinner"></div></div>';
   }
 
   async loadQuotes() {
-    this.selectedCurrencies.size === 0
-      ? this.moedasContainer.innerHTML = "<p>Selecione pelo menos uma moeda para exibir as cotações.</p>"
-      : (async () => {
-          try {
-            const moedas = await this.api.getLastQuotes(Array.from(this.selectedCurrencies).join(","));
-            this.renderQuotes(moedas);
-          } catch (error) {
-            this.moedasContainer.innerHTML = this.getErrorMessage("Erro ao carregar cotações.");
-          }
-        })();
+      if (this.selectedCurrencies.size === 0) {
+          alert('Por favor, adicione pelo menos uma moeda.');
+          return;
+      }
+
+      const currenciesArray = Array.from(this.selectedCurrencies).join(',');
+      
+      try {
+          this.showLoading('moedas');
+          const quotes = await this.fetchQuotes(currenciesArray);
+          this.displayQuotes(quotes);
+          this.updateLastUpdate();
+      } catch (error) {
+          console.error('Erro ao carregar cotações:', error);
+          this.displayError('Erro ao carregar cotações. Tente novamente.');
+      } finally {
+          this.hideLoading('moedas');
+      }
   }
 
-  async loadHistoric() {
-    const currency = this.currencyHistoric.value;
-    const days = parseInt(this.daysSelect.value);
-
-    try {
-      const historico = await this.api.getDailyQuotes(currency, days);
-      this.renderHistoric(historico, currency);
-    } catch (error) {
-      this.historicoTbody.innerHTML = `<tr><td colspan="6">${this.getErrorMessage("Erro ao carregar histórico.")}</td></tr>`;
-    }
+  async fetchQuotes(currencies) {
+      // Usando a AwesomeAPI
+      const response = await fetch(`https://economia.awesomeapi.com.br/json/last/${currencies}-BRL`);
+      
+      if (!response.ok) {
+          throw new Error(`Erro HTTP: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return this.processQuotesData(data);
   }
 
-  renderQuotes(moedas) {
-    this.moedasContainer.innerHTML = Object.entries(moedas).map(([key, data]) => {
-      const variationClass = data.pctChange >= 0 ? "positive" : "negative";
-      return `<div class="card">
-                <h2>${data.name}</h2>
-                <p><span class="label">Compra:</span><span class="value">${this.formatCurrencyValue(data.bid, data.codein)}</span></p>
-                <p><span class="label">Venda:</span><span class="value">${this.formatCurrencyValue(data.ask, data.codein)}</span></p>
-                <p><span class="label">Variação:</span><span class="value ${variationClass}"><span class="variation-indicator">${data.pctChange}%</span></span></p>
-                <p><span class="label">Mínimo:</span><span class="value">${this.formatCurrencyValue(data.low, data.codein)}</span></p>
-                <p><span class="label">Máximo:</span><span class="value">${this.formatCurrencyValue(data.high, data.codein)}</span></p>
-                <p><span class="label">Atualizado:</span><span class="value">${this.formatDisplayDate(data.create_date)}</span></p>
-              </div>`;
-    }).join('');
+  processQuotesData(apiData) {
+      const quotes = [];
+      
+      for (const key in apiData) {
+          const item = apiData[key];
+          quotes.push({
+              code: item.code,
+              name: item.name,
+              bid: parseFloat(item.bid),
+              ask: parseFloat(item.ask),
+              high: parseFloat(item.high),
+              low: parseFloat(item.low),
+              variation: parseFloat(item.pctChange),
+              timestamp: item.timestamp
+          });
+      }
+      
+      return quotes;
   }
 
-  renderHistoric(historico, currency) {
-    this.historicoTbody.innerHTML = !historico || historico.length === 0
-      ? `<tr><td colspan="6">Nenhum dado histórico disponível.</td></tr>`
-      : historico.map(dia => {
-          const data = dia.create_date || new Date(dia.timestamp * 1000).toLocaleDateString("pt-BR");
-          const variacao = parseFloat(dia.pctChange);
-          const variationClass = variacao >= 0 ? "positive" : "negative";
-          const targetCurrency = currency.split("-")[1];
+  displayQuotes(quotes) {
+      const container = document.getElementById('moedas');
+      container.innerHTML = '';
+
+      quotes.forEach(quote => {
+          const card = document.createElement('div');
+          card.className = 'card';
           
-          return `<tr>
-                    <td>${data}</td>
-                    <td>${this.formatCurrencyValue(dia.bid, targetCurrency)}</td>
-                    <td>${this.formatCurrencyValue(dia.ask, targetCurrency)}</td>
-                    <td class="${variationClass}"><span class="variation-indicator">${variacao}%</span></td>
-                    <td>${this.formatCurrencyValue(dia.high, targetCurrency)}</td>
-                    <td>${this.formatCurrencyValue(dia.low, targetCurrency)}</td>
-                  </tr>`;
-        }).join('');
+          const variationClass = quote.variation >= 0 ? 'positive' : 'negative';
+          const variationIcon = quote.variation >= 0 ? '↗' : '↘';
+
+          card.innerHTML = `
+              <div class="card-header">
+                  <h3>${quote.code}</h3>
+                  <span class="currency-name">${quote.name}</span>
+              </div>
+              <div class="card-body">
+                  <div class="quote-row">
+                      <span class="label">Compra:</span>
+                      <span class="value">R$ ${quote.bid.toFixed(4)}</span>
+                  </div>
+                  <div class="quote-row">
+                      <span class="label">Venda:</span>
+                      <span class="value">R$ ${quote.ask.toFixed(4)}</span>
+                  </div>
+                  <div class="quote-row">
+                      <span class="label">Variação:</span>
+                      <span class="value ${variationClass}">
+                          ${variationIcon} ${Math.abs(quote.variation).toFixed(2)}%
+                      </span>
+                  </div>
+                  <div class="quote-row">
+                      <span class="label">Máximo:</span>
+                      <span class="value">R$ ${quote.high.toFixed(4)}</span>
+                  </div>
+                  <div class="quote-row">
+                      <span class="label">Mínimo:</span>
+                      <span class="value">R$ ${quote.low.toFixed(4)}</span>
+                  </div>
+              </div>
+              <div class="card-footer">
+                  <small>Atualizado: ${new Date().toLocaleTimeString('pt-BR')}</small>
+              </div>
+          `;
+          
+          container.appendChild(card);
+      });
   }
 
-  formatCurrencyValue(value, currencyCode) {
-    const numericValue = parseFloat(value);
-    const currencySymbols = {
-      'BRL': 'R$',
-      'USD': 'US$', 
-      'EUR': '€',
-      'JPY': '¥',
-      'GBP': '£'
-    };
-    
-    const symbol = currencySymbols[currencyCode] || currencyCode;
-    const decimals = currencyCode === 'JPY' ? 2 : 4;
-    
-    return `${symbol} ${numericValue.toFixed(decimals)}`;
+  async loadHistoricData() {
+      const currency = document.getElementById('currency-historic').value;
+      const days = document.getElementById('days-select').value;
+
+      if (!currency) {
+          alert('Por favor, selecione uma moeda para o histórico.');
+          return;
+      }
+
+      try {
+          this.showLoading('historic');
+          const historicData = await this.fetchHistoricData(currency, parseInt(days));
+          this.createHistoricChart(historicData, currency);
+          this.updateHistoricTable(historicData);
+      } catch (error) {
+          console.error('Erro ao carregar histórico:', error);
+          alert('Erro ao carregar dados históricos. Tente novamente.');
+      } finally {
+          this.hideLoading('historic');
+      }
   }
 
-  formatDisplayDate(dateString) {
-    return !dateString ? "N/A" : new Date(dateString).toLocaleString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+  async fetchHistoricData(currency, days) {
+      try {
+          console.log(`Buscando histórico: ${currency}, ${days} dias`);
+          
+          // AwesomeAPI para dados históricos
+          const response = await fetch(`https://economia.awesomeapi.com.br/json/daily/${currency}-BRL/${days}`);
+          
+          if (!response.ok) {
+              throw new Error(`Erro HTTP: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          return this.processHistoricData(data);
+          
+      } catch (error) {
+          console.error('Erro na API, usando dados mock:', error);
+          // Fallback para dados mock
+          return this.generateMockHistoricData(currency, days);
+      }
   }
 
-  setLoadingState(isLoading) {
-    const btnText = this.refreshBtn.querySelector(".btn-text");
-    const btnIcon = this.refreshBtn.querySelector(".btn-icon");
-    
-    this.refreshBtn.disabled = isLoading;
-    btnText.textContent = isLoading ? "Carregando..." : "Atualizar";
-    btnIcon.textContent = isLoading ? "⟳" : "↻";
-    btnIcon.style.animation = isLoading ? "spin 1s linear infinite" : "";
+  processHistoricData(apiData) {
+      return apiData.map(item => {
+          const date = new Date(parseInt(item.timestamp) * 1000);
+          return {
+              date: date.toLocaleDateString('pt-BR'),
+              timestamp: date,
+              bid: parseFloat(item.bid),
+              ask: parseFloat(item.ask),
+              variation: parseFloat(item.pctChange),
+              high: parseFloat(item.high),
+              low: parseFloat(item.low),
+              open: parseFloat(item.open)
+          };
+      }).reverse(); // Ordem cronológica
   }
 
-  updateLastUpdateTime() {
-    this.lastUpdate.textContent = `Última atualização: ${new Date().toLocaleString("pt-BR")}`;
+  generateMockHistoricData(currency, days) {
+      const data = [];
+      const basePrices = {
+          'USD': 5.20, 'EUR': 5.60, 'GBP': 6.50, 'JPY': 0.035,
+          'BTC': 150000, 'ETH': 10000, 'LTC': 500, 'XRP': 3.0
+      };
+      
+      const basePrice = basePrices[currency] || 5.0;
+      
+      for (let i = days - 1; i >= 0; i--) {
+          const date = new Date();
+          date.setDate(date.getDate() - i);
+          
+          const variation = (Math.random() - 0.5) * 4;
+          const price = basePrice * (1 + (variation / 100) * (i / days));
+          const high = price * (1 + Math.random() * 0.03);
+          const low = price * (1 - Math.random() * 0.02);
+          const bid = price * 0.998;
+          const ask = price * 1.002;
+
+          data.push({
+              date: date.toLocaleDateString('pt-BR'),
+              timestamp: date,
+              bid: parseFloat(bid.toFixed(4)),
+              ask: parseFloat(ask.toFixed(4)),
+              variation: parseFloat(variation.toFixed(2)),
+              high: parseFloat(high.toFixed(4)),
+              low: parseFloat(low.toFixed(4))
+          });
+      }
+      
+      return data;
   }
 
-  showError(message) {
-    const existingError = document.querySelector(".error-message");
-    existingError?.remove();
+  createHistoricChart(data, currency) {
+      const ctx = document.getElementById('historic-chart');
+      if (!ctx) return;
 
-    const errorDiv = document.createElement("div");
-    errorDiv.className = "error-message";
-    errorDiv.textContent = message;
+      // Destruir gráfico anterior se existir
+      if (this.historicChart) {
+          this.historicChart.destroy();
+      }
 
-    const firstTitle = document.querySelector(".section-title");
-    firstTitle.parentNode.insertBefore(errorDiv, firstTitle.nextSibling);
+      const labels = data.map(item => item.date);
+      const bidPrices = data.map(item => item.bid);
+      const askPrices = data.map(item => item.ask);
 
-    setTimeout(() => errorDiv.parentNode?.removeChild(errorDiv), 5000);
+      this.historicChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [
+                  {
+                      label: 'Preço de Compra (Bid)',
+                      data: bidPrices,
+                      backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                      borderColor: 'rgba(54, 162, 235, 1)',
+                      borderWidth: 1,
+                      yAxisID: 'y'
+                  },
+                  {
+                      label: 'Preço de Venda (Ask)',
+                      data: askPrices,
+                      backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                      borderColor: 'rgba(255, 99, 132, 1)',
+                      borderWidth: 1,
+                      yAxisID: 'y'
+                  }
+              ]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                  title: {
+                      display: true,
+                      text: `Histórico de Cotações - ${currency}/BRL`,
+                      font: {
+                          size: 16,
+                          weight: 'bold'
+                      }
+                  },
+                  legend: {
+                      position: 'top',
+                  },
+                  tooltip: {
+                      mode: 'index',
+                      intersect: false,
+                      callbacks: {
+                          label: function(context) {
+                              let label = context.dataset.label || '';
+                              if (label) {
+                                  label += ': ';
+                              }
+                              label += new Intl.NumberFormat('pt-BR', {
+                                  style: 'currency',
+                                  currency: 'BRL'
+                              }).format(context.parsed.y);
+                              return label;
+                          }
+                      }
+                  }
+              },
+              scales: {
+                  x: {
+                      title: {
+                          display: true,
+                          text: 'Data'
+                      },
+                      grid: {
+                          display: false
+                      }
+                  },
+                  y: {
+                      title: {
+                          display: true,
+                          text: 'Valor (R$)'
+                      },
+                      beginAtZero: false,
+                      ticks: {
+                          callback: function(value) {
+                              return new Intl.NumberFormat('pt-BR', {
+                                  style: 'currency',
+                                  currency: 'BRL'
+                              }).format(value);
+                          }
+                      }
+                  }
+              },
+              interaction: {
+                  mode: 'nearest',
+                  axis: 'x',
+                  intersect: false
+              }
+          }
+      });
   }
 
-  getErrorMessage(message) {
-    return `<div class="error-message">${message}</div>`;
+  updateHistoricTable(data) {
+      const tbody = document.querySelector('#historico tbody');
+      if (!tbody) return;
+
+      tbody.innerHTML = '';
+
+      data.forEach(item => {
+          const row = document.createElement('tr');
+          const variationClass = item.variation >= 0 ? 'positive' : 'negative';
+          const variationIcon = item.variation >= 0 ? '↗' : '↘';
+
+          row.innerHTML = `
+              <td>${item.date}</td>
+              <td>R$ ${item.bid.toFixed(4)}</td>
+              <td>R$ ${item.ask.toFixed(4)}</td>
+              <td class="${variationClass}">
+                  ${variationIcon} ${Math.abs(item.variation).toFixed(2)}%
+              </td>
+              <td>R$ ${item.high.toFixed(4)}</td>
+              <td>R$ ${item.low.toFixed(4)}</td>
+          `;
+          tbody.appendChild(row);
+      });
+  }
+
+  showLoading(elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+          element.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+      }
+  }
+
+  hideLoading(elementId) {
+      // Apenas limpa o loading, o conteúdo será preenchido pelos métodos específicos
+  }
+
+  displayError(message) {
+      const container = document.getElementById('moedas');
+      container.innerHTML = `
+          <div class="error-message">
+              <span>⚠️</span>
+              <p>${message}</p>
+          </div>
+      `;
+  }
+
+  updateLastUpdate() {
+      const lastUpdate = document.getElementById('last-update');
+      if (lastUpdate) {
+          lastUpdate.textContent = `Última atualização: ${new Date().toLocaleString('pt-BR')}`;
+      }
+  }
+
+  loadInitialData() {
+      // Adiciona algumas moedas por padrão
+      this.selectedCurrencies.add('USD');
+      this.selectedCurrencies.add('EUR');
+      this.selectedCurrencies.add('BTC');
+      this.updateSelectedCurrenciesList();
+      
+      // Carrega as cotações iniciais após um breve delay
+      setTimeout(() => {
+          this.loadQuotes();
+      }, 1000);
   }
 }
 
-let currencyApp;
-document.addEventListener("DOMContentLoaded", () => {
-  currencyApp = new CurrencyApp();
-});
+// Inicializar a aplicação
+const currencyApp = new CurrencyApp();
+
+// Export para módulos (se necessário)
+export { CurrencyApp };

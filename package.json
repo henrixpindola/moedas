@@ -10,6 +10,7 @@
     "vercel-build": "npm install && npm run build"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "express": "^4.19.2",
     "express-http-proxy": "^2.1.2",
     "node": "^22.21.0"
@@ -19,5 +20,17 @@
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.7",
     "vite": "^5.4.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrixpindola/moedas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/henrixpindola/moedas/issues"
+  },
+  "homepage": "https://github.com/henrixpindola/moedas#readme"
 }
