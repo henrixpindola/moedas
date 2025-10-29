@@ -28,12 +28,15 @@ Facilitar o acompanhamento de taxas de câmbio e criptoativos, apresentando valo
 
 ## 🛠 Tecnologias
 
-* **HTML5** — estrutura semântica
-* **CSS3** — estilos e responsividade
-* **JavaScript** — lógica do cliente e consumo da API
-* **AwesomeAPI** — fonte de cotações
-* **Node/Express** (proxy) — para proteger chaves e evitar CORS (arquivo `server/routes/proxy.js`)
-* **Vercel** — deploy
+* **HTML5** — Estrutura semântica e acessível das páginas
+* **CSS3** — Estilização moderna com layout responsivo
+* **JavaScript (ES6+)** — Lógica dinâmica, manipulação do DOM e consumo da API
+* **Chart.js** — Renderização de gráficos de linha para histórico de cotações
+* **AwesomeAPI** — Fonte oficial das cotações de moedas e criptoativos
+* **Node.js + Express** — Backend simples para proxy (evita problemas de CORS e protege requisições)
+
+  * Arquivo: `server/routes/proxy.js`
+* **Vercel** — Hospedagem e deploy contínuo
 
 ---
 
