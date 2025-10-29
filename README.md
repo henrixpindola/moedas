@@ -99,7 +99,7 @@ Facilitar o acompanhamento de taxas de câmbio e criptoativos, apresentando valo
 ## 🚀 Como Executar Localmente
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/henrixpindola/moedas.git
 cd moedas
 # Abra com Live Server, Vite dev server, ou outro servidor local
 ```
