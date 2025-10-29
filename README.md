@@ -1,82 +1,172 @@
 # MoneyLens
 
-Um projeto web para consulta de cotações de moedas em tempo real utilizando a AwesomeAPI.
+Aplicação web para **consulta de cotações de moedas e criptoativos em tempo real**, com visualização histórica, seleção dinâmica de pares e interface responsiva.
+Dados obtidos pela **AwesomeAPI**.
 
-## 📋 Descrição
-
-Este projeto permite visualizar cotações de moedas estrangeiras em relação ao Real Brasileiro (BRL), com funcionalidades para seleção de moedas, visualização em tempo real e histórico de cotações.
-
-## ✨ Funcionalidades
-
-- **Seleção de Moedas**: Interface intuitiva para selecionar múltiplas moedas
-- **Cotações em Tempo Real**: Cards com informações atualizadas de compra, venda e variação
-- **Histórico de Cotações**: Tabela com dados históricos dos últimos 7, 15 ou 30 dias
-- **Interface Responsiva**: Design adaptável para diferentes tamanhos de tela
-- **Atualização Manual**: Botão para atualizar as cotações manualmente
-- **Menu Dropdown**: Navegação com menus suspensos
-
-## 🛠️ Tecnologias Utilizadas
-
-- **HTML5**: Estrutura semântica com elementos acessíveis
-- **CSS3**: Estilização moderna com variáveis CSS e design responsivo
-- **JavaScript**: Funcionalidades dinâmicas e consumo de API
-- **AwesomeAPI**: API para obtenção dos dados de cotações
-
-## 🚀 Como Usar
-
-1. **Seleção de Moedas**:
-   - Escolha uma moeda no dropdown "Selecionar Moeda"
-   - Clique em "Adicionar" para incluir na lista
-   - Use "Limpar Todas" para remover todas as seleções
-
-2. **Visualizar Cotações**:
-   - Clique em "Carregar Cotações" para ver as moedas selecionadas
-   - Use "Atualizar" para obter os dados mais recentes
-
-3. **Consultar Histórico**:
-   - Selecione o período desejado (7, 15 ou 30 dias)
-   - Escolha a moeda para visualizar o histórico
-   - A tabela será atualizada automaticamente
-  
-## 🎨 Características da Interface
-
-- **Design Moderno**: Cards com sombras e gradientes
-- **Indicadores Visuais**: Cores para variação positiva (verde) e negativa (vermelho)
-- **Loading States**: Spinners durante o carregamento de dados
-- **Navegação Intuitiva**: Menu dropdown organizado por categorias
-
-## 🔧 Configuração e Desenvolvimento
-
-Para executar o projeto localmente:
-
-1. Clone o repositório
-2. Sirva os arquivos através de um servidor web local
-3. Abra o `index.html` no navegador
-
-## 📊 Moedas Disponíveis
-
-O sistema suporta as principais moedas internacionais, incluindo:
-
-- Dólar Americano (USD)
-- Euro (EUR)
-- Libra Esterlina (GBP)
-- Iene Japonês (JPY)
-- E outras moedas suportadas pela AwesomeAPI
-
-## 📱 Responsividade
-
-O projeto é totalmente responsivo, adaptando-se a:
-
-- Desktops
-- Tablets
-- Dispositivos móveis
-
-## 🔄 Atualizações
-
-- As cotações podem ser atualizadas manualmente
-- O histórico é atualizado automaticamente ao alterar período ou moeda
-- Timestamp da última atualização visível na interface
+> **Deploy:** [https://financial-lac-pi.vercel.app/](https://financial-lac-pi.vercel.app/)
+> **Documentação da API:** [https://docs.awesomeapi.com.br/api-de-moedas](https://docs.awesomeapi.com.br/api-de-moedas)
 
 ---
 
-Desenvolvido para facilitar o acompanhamento das cotações de moedas de forma prática e visualmente agradável.
+## 🎯 Objetivo
+
+Facilitar o acompanhamento de taxas de câmbio e criptoativos, apresentando valores (compra/venda), variação percentual e histórico de forma clara e acessível. Ideal para estudantes, investidores e usuários que acompanham o câmbio.
+
+---
+
+## ✨ Funcionalidades
+
+* Seleção de múltiplas moedas
+* Cards em tempo real com compra, venda, variação e timestamp
+* Histórico de preços (7, 15 ou 30 dias)
+* Gráficos e tabelas dinâmicas
+* Atualização manual das cotações
+* Menu responsivo com dropdown
+* Estados de loading e tratamento de erros
+
+---
+
+## 🛠 Tecnologias
+
+* **HTML5** — estrutura semântica
+* **CSS3** — estilos e responsividade
+* **JavaScript** — lógica do cliente e consumo da API
+* **AwesomeAPI** — fonte de cotações
+* **Node/Express** (proxy) — para proteger chaves e evitar CORS (arquivo `server/routes/proxy.js`)
+* **Vercel** — deploy
+
+---
+
+## 📊 Moedas e Pares Suportados
+
+### Moedas e Cripto em Real (BRL)
+
+* USD-BRL — Dólar Americano → Real
+* USD-BRLT — Dólar Turismo → Real
+* EUR-BRL — Euro → Real
+* GBP-BRL — Libra Esterlina → Real
+* ARS-BRL — Peso Argentino → Real
+* CAD-BRL — Dólar Canadense → Real
+* JPY-BRL — Iene Japonês → Real
+* CHF-BRL — Franco Suíço → Real
+* AUD-BRL — Dólar Australiano → Real
+* CNY-BRL — Yuan Chinês → Real
+* BTC-BRL — Bitcoin → Real
+* ETH-BRL — Ethereum → Real
+* LTC-BRL — Litecoin → Real
+* XRP-BRL — XRP (Ripple) → Real
+* DOGE-BRL — Dogecoin → Real
+* USD-BRLPTAX — Dólar PTAX → Real
+* EUR-BRLPTAX — Euro PTAX → Real
+* XAU-BRL — Ouro → Real
+* XAG-BRL — Prata → Real
+
+### Pares com Dólar Americano (USD)
+
+* EUR-USD — Euro → Dólar
+* GBP-USD — Libra → Dólar
+* USD-JPY — Dólar → Iene Japonês
+* USD-CHF — Dólar → Franco Suíço
+* USD-CAD — Dólar → Dólar Canadense
+* AUD-USD — Dólar Australiano → Dólar
+* NZD-USD — Dólar Neozelandês → Dólar
+* BTC-USD — Bitcoin → Dólar
+* ETH-USD — Ethereum → Dólar
+* XAU-USD — Ouro → Dólar
+* XAG-USD — Prata → Dólar
+* USD-MXN — Dólar → Peso Mexicano
+* USD-ZAR — Dólar → Rand Sul-Africano
+* USD-TRY — Dólar → Lira Turca
+* USD-SGD — Dólar → Dólar de Cingapura
+* USD-INR — Dólar → Rúpia Indiana
+* USD-KRW — Dólar → Won Sul-Coreano
+
+### Pares com Euro (EUR)
+
+* EUR-GBP — Euro → Libra
+* EUR-JPY — Euro → Iene
+* EUR-CHF — Euro → Franco Suíço
+* EUR-CAD — Euro → Dólar Canadense
+* BTC-EUR — Bitcoin → Euro
+* ETH-EUR — Ethereum → Euro
+* XAU-EUR — Ouro → Euro
+
+---
+
+## 🚀 Como Executar Localmente
+
+```bash
+git clone <url-do-repositorio>
+cd moedas
+# Abra com Live Server, Vite dev server, ou outro servidor local
+```
+
+> Observação: algumas chamadas à API podem exigir servidor (proxy) por CORS ou por segurança da chave.
+
+---
+
+## 🗂 Estrutura do Projeto
+
+```
+├── 📁 .vercel
+│   └── ⚙️ project.json
+├── 📁 img
+│   └── 🖼️ logo.png
+├── 📁 pages
+│   ├── 🌐 converter.html
+│   ├── 🌐 exchange.html
+│   ├── 🌐 index.html
+│   ├── 🌐 investments.html
+│   └── 🌐 whoweare.html
+├── 📁 server
+│   ├── 📁 routes
+│   │   ├── 📄 hello.js
+│   │   └── 📄 proxy.js
+│   └── 📄 server.js
+├── 📁 src
+│   ├── 📁 assets
+│   │   └── 🖼️ logo.png
+│   ├── 📁 scripts
+│   │   ├── 📄 attention.js
+│   │   ├── 📄 historic-chart.js
+│   │   ├── 📄 menu-bar.js
+│   │   ├── 📄 menu.js
+│   │   └── 📄 scripts.js
+│   └── 📁 styles
+│       └── 🎨 style.css
+├── ⚙️ .gitignore
+├── ⚙️ .vercelignore
+├── 📝 README.md
+├── ⚙️ nodemon.json
+├── ⚙️ package-lock.json
+├── ⚙️ package.json
+├── ⚙️ vercel.json
+└── 📄 vite.config.js
+```
+
+---
+
+## 👥 Equipe
+
+* **Henrique Espindola** — [https://github.com/henrixpindola](https://github.com/henrixpindola)
+* **André Penha** — [https://github.com/andrepenhakotlin](https://github.com/andrepenhakotlin)
+* **Valesca** — [https://github.com/val751](https://github.com/val751)
+
+---
+
+## 🙏 Agradecimentos
+
+Agradecimento especial ao professor **Matheus Pedrow** — [https://github.com/matheuspedrow](https://github.com/matheuspedrow)
+
+---
+
+## 🔗 Links Úteis
+
+* Deploy: [https://financial-lac-pi.vercel.app/](https://financial-lac-pi.vercel.app/)
+* Docs AwesomeAPI: [https://docs.awesomeapi.com.br/api-de-moedas](https://docs.awesomeapi.com.br/api-de-moedas)
+
+---
+
+## 📄 Licença
+
+Uso livre para fins educacionais, estudo e demonstração. Ajuste conforme necessidade do projeto.
