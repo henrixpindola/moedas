@@ -110,7 +110,7 @@ cd moedas
 
 ## 🗂 Estrutura do Projeto
 
-```
+```moedas/
 ├── 📁 .vercel
 │   └── ⚙️ project.json
 ├── 📁 img
