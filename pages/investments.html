@@ -7,7 +7,9 @@
     <link rel="icon" type="image/png" href="/src/assets/logo.png" />
     <link rel="stylesheet" href="/src/styles/style.css" />
   </head>
+
   <body>
+    <!-- Topbar -->
     <div class="topbar">
       <div class="topbar-content">
         <span class="menu-icon">
@@ -18,6 +20,7 @@
           </div>
         </span>
 
+        <!-- Navbar -->
         <div class="navbar">
           <ul class="nav">
             <li><a href="/pages/index.html">Início</a></li>
@@ -37,7 +40,7 @@
               <ul class="dropdown">
                 <li><a href="/pages/investments.html">Renda fixa</a></li>
                 <li><a href="/pages/investments.html">Renda variável</a></li>
-                <li><a href="/pages/investments.html">TESOURO DIRETO</a></li>
+                <li><a href="/pages/investments.html">Tesouro Direto</a></li>
                 <li>
                   <a href="/pages/investments.html">Fundos de investimento</a>
                 </li>
@@ -48,9 +51,9 @@
                   <a href="/pages/investments.html">Previdência privada</a>
                 </li>
                 <li>
-                  <a href="/pages/investments.html"
-                    >Bitcoin e outros criptoativos</a
-                  >
+                  <a href="/pages/investments.html">
+                    Bitcoin e outros criptoativos
+                  </a>
                 </li>
                 <li><a href="/pages/investments.html">Mercado de ações</a></li>
                 <li>
@@ -69,24 +72,122 @@
             </li>
           </ul>
         </div>
+
         <span class="attention-icon" title="Ajuda"><b>?</b></span>
       </div>
     </div>
 
+    <!-- Conteúdo principal -->
+    <main class="content">
+      <section class="investments">
+        <h1>Tipos de Investimentos</h1>
+
+        <article>
+          <h2>🏦 Renda Fixa</h2>
+          <p>
+            Investimentos em que a rentabilidade é previsível, pois a taxa de
+            juros ou o índice de correção é definido no momento da aplicação.
+            Exemplos: CDB, LCI, LCA e Tesouro Direto. Geralmente são opções mais
+            seguras.
+          </p>
+        </article>
+
+        <article>
+          <h2>📈 Renda Variável</h2>
+          <p>
+            A rentabilidade depende das oscilações do mercado. Os ganhos (ou
+            perdas) variam conforme o desempenho do ativo, como ações e fundos
+            imobiliários. Oferece mais risco, mas também mais potencial de
+            lucro.
+          </p>
+        </article>
+
+        <article>
+          <h2>💰 Tesouro Direto</h2>
+          <p>
+            Programa do governo que permite investir em títulos públicos. É uma
+            das formas mais seguras de investimento no Brasil, com opções que
+            acompanham a Selic, o IPCA ou pagam juros fixos.
+          </p>
+        </article>
+
+        <article>
+          <h2>📊 Fundos de Investimento</h2>
+          <p>
+            Reúnem recursos de vários investidores para aplicar em diferentes
+            ativos. Um gestor profissional administra o fundo, e o investidor
+            compra “cotas”. Existem fundos de renda fixa, multimercado, ações,
+            entre outros.
+          </p>
+        </article>
+
+        <article>
+          <h2>🏢 Fundos Imobiliários (FIIs)</h2>
+          <p>
+            Fundos que investem em imóveis físicos ou títulos ligados ao setor
+            imobiliário. O investidor recebe rendimentos (como “aluguéis”) e
+            pode ganhar com a valorização das cotas na bolsa.
+          </p>
+        </article>
+
+        <article>
+          <h2>🧓 Previdência Privada</h2>
+          <p>
+            Investimento de longo prazo voltado para a aposentadoria. Oferece
+            benefícios fiscais e planos com diferentes estratégias de
+            rentabilidade (PGBL e VGBL).
+          </p>
+        </article>
+
+        <article>
+          <h2>₿ Bitcoin e Outros Criptoativos</h2>
+          <p>
+            Moedas digitais descentralizadas baseadas em tecnologia blockchain.
+            São altamente voláteis e arriscadas, mas podem oferecer ganhos
+            expressivos a longo prazo.
+          </p>
+        </article>
+
+        <article>
+          <h2>💹 Mercado de Ações</h2>
+          <p>
+            Ambiente onde são compradas e vendidas partes (ações) de empresas. O
+            investidor pode lucrar com a valorização das ações e com o pagamento
+            de dividendos.
+          </p>
+        </article>
+
+        <article>
+          <h2>💼 Outros Investimentos</h2>
+          <p>
+            Incluem opções como commodities (ouro, petróleo, soja), câmbio,
+            NFTs, crowdfunding imobiliário, startups e investimentos no
+            exterior. Servem para diversificar e equilibrar riscos na carteira.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
     <footer class="footer">
-        <div class="footer-content">
-          <p class="footer-brand">MoneyLens - Cotações de Moedas</p>
-          <nav class="footer-nav">
-            <a href="https://github.com/henrixpindola/moedas">Projeto GitHub</a>
-          </nav>
-        </div>
-      </footer> 
-      
+      <div class="footer-content">
+        <p class="footer-brand">MoneyLens - Cotações de Moedas</p>
+        <nav class="footer-nav">
+          <a href="https://github.com/henrixpindola/moedas" target="_blank">
+            Projeto GitHub
+          </a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
     <script type="module" src="/src/scripts/scripts.js"></script>
     <script type="module" src="/src/scripts/menu.js"></script>
     <script type="module" src="/src/scripts/attention.js"></script>
     <script type="module" src="/src/scripts/menu-bar.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-   
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
   </body>
 </html>
