@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyLens - Cotações de Moedas</title>
+    <link rel="icon" type="image/png" href="/src/assets/logo.png" />
+    <link rel="stylesheet" href="/src/styles/style.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-content">
+        <span class="menu-icon">
+          <div id="menu-bar" class="menu-bar" onclick="menuOnClick()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+          </div>
+        </span>
+
+        <div class="navbar">
+          <ul class="nav">
+            <li><a href="/pages/index.html">Início</a></li>
+            <li><a href="/pages/converter.html">Converter valores</a></li>
+            <li>
+              Cotações
+              <ul class="dropdown">
+                <li><a href="/pages/exchange.html">Real</a></li>
+                <li><a href="/pages/exchange.html">Dólar</a></li>
+                <li><a href="/pages/exchange.html">Euro</a></li>
+                <li><a href="/pages/exchange.html">Outras moedas</a></li>
+                <li><a href="/pages/exchange.html">Criptomoedas</a></li>
+              </ul>
+            </li>
+            <li>
+              Investimentos
+              <ul class="dropdown">
+                <li><a href="/pages/investments.html">Renda fixa</a></li>
+                <li><a href="/pages/investments.html">Renda variável</a></li>
+                <li><a href="/pages/investments.html">TESOURO DIRETO</a></li>
+                <li>
+                  <a href="/pages/investments.html">Fundos de investimento</a>
+                </li>
+                <li>
+                  <a href="/pages/investments.html">Fundos imobiliários</a>
+                </li>
+                <li>
+                  <a href="/pages/investments.html">Previdência privada</a>
+                </li>
+                <li>
+                  <a href="/pages/investments.html"
+                    >Bitcoin e outros criptoativos</a
+                  >
+                </li>
+                <li><a href="/pages/investments.html">Mercado de ações</a></li>
+                <li>
+                  <a href="/pages/investments.html">Outros investimentos</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Quem somos
+              <ul class="dropdown">
+                <li><a href="/pages/whoweare.html">Nossa equipe</a></li>
+                <li><a href="/pages/whoweare.html">Objetivo</a></li>
+                <li><a href="/pages/whoweare.html">Contato</a></li>
+                <li>Ajuda</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <span class="attention-icon" title="Ajuda"><b>?</b></span>
+      </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+          <p class="footer-brand">MoneyLens - Cotações de Moedas</p>
+          <nav class="footer-nav">
+            <a href="https://github.com/henrixpindola/moedas">Projeto GitHub</a>
+          </nav>
+        </div>
+      </footer> 
+      
+    <script type="module" src="/src/scripts/scripts.js"></script>
+    <script type="module" src="/src/scripts/menu.js"></script>
+    <script type="module" src="/src/scripts/attention.js"></script>
+    <script type="module" src="/src/scripts/menu-bar.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+  </body>
+</html>
