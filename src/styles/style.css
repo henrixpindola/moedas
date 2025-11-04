@@ -64,7 +64,6 @@
         /*TOPBAR*/
         .topbar {
           background: black;
-          position: sticky;
           top: 0;
           z-index: 1000;
           backdrop-filter: blur(10px);
