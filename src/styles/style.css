@@ -979,3 +979,55 @@
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+
+        .carousel-section {
+          text-align: center;
+          margin: 3rem 0;
+        }
+        
+        .carousel-container {
+          position: relative;
+          max-width: 800px;
+          margin: 0 auto;
+          overflow: hidden;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-track {
+          display: flex;
+          transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-track img {
+          width: 100%;
+          flex-shrink: 0;
+          object-fit: cover;
+        }
+        
+        .carousel-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: rgba(0, 0, 0, 0.4);
+          border: none;
+          color: #fff;
+          font-size: 2rem;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          z-index: 2;
+          border-radius: 5px;
+        }
+        
+        .carousel-btn:hover {
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .carousel-btn.prev {
+          left: 10px;
+        }
+        
+        .carousel-btn.next {
+          right: 10px;
+        }
+        

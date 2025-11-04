@@ -72,7 +72,50 @@
         <span class="attention-icon" title="Ajuda"><b>?</b></span>
       </div>
     </div>
+    <section class="historic">
+      <h2 class="section-title">Histórico</h2>
+      <div class="controls">
+        <div class="form-group">
+          <label for="days-select">Período:</label>
+          <div class="select-wrapper">
+            <select id="days-select">
+              <option value="7">Últimos 7 dias</option>
+              <option value="15">Últimos 15 dias</option>
+              <option value="30">Últimos 30 dias</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="currency-historic">Moeda:</label>
+          <div class="select-wrapper">
+            <select id="currency-historic"></select>
+          </div>
+        </div>
+        <button id="load-historic-btn" class="btn">Carregar Histórico</button>
+      </div>
 
+      <div class="chart-container" style="margin: 2rem 0">
+        <canvas id="historic-chart"></canvas>
+      </div>
+
+      <table id="historico" class="historico">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Compra</th>
+            <th>Venda</th>
+            <th>Variação (%)</th>
+            <th>Máximo</th>
+            <th>Mínimo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="6" class="loading"><div class="spinner"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <footer class="footer">
         <div class="footer-content">
           <p class="footer-brand">MoneyLens - Cotações de Moedas</p>
